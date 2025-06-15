@@ -9,8 +9,6 @@ from django.contrib.auth.models import (
 )
 
 
-
-
 class UserManager(BaseUserManager):
     """User Mnager for creating and returning the user"""
     def create_user(self, email, password=None, **extra_fields):
@@ -21,7 +19,7 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
 
         return user
-    
+
     def create_superuser(self, email, password):
         """For creating superuser"""
         if not email:
@@ -30,9 +28,10 @@ class UserManager(BaseUserManager):
         user.is_superuser = True
         user.is_staff = True
         user.save(using=self._db)
-        
+
         return user
-        
+
+
 class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(max_length=255, unique=True)
     name = models.CharField(max_length=255)
