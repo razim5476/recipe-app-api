@@ -5,7 +5,7 @@ from django.contrib.auth import get_user_model
 from rest_framework import status
 from rest_framework.test import APIClient
 from django.urls import reverse
-from recipe.serializers import RecipeSerializer, RecipeDetailSerializer
+from recipe.serializers import RecipeDetailSerializer
 
 
 RECIPE_URL = reverse('recipe:recipe-list')
@@ -162,7 +162,7 @@ class PrivateReipeAPITests(TestCase):
             'user': new_user.id
         }
         url = recipe_detail_url(recipe_id=recipe.id)
-        res = self.client.patch(url, payload)
+        self.client.patch(url, payload)
 
         recipe.refresh_from_db()
         self.assertEqual(recipe.user, self.user)
